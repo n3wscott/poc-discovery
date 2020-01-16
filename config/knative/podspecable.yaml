@@ -1,0 +1,57 @@
+apiVersion: discovery.knative.dev/v1alpha1
+kind: DuckType
+metadata:
+  name: podspecable.duck.knative.dev
+spec:
+  selectors:
+    - selector: "duck.knative.dev/podspecable=true"
+
+  refs:
+    - group: serving.knative.dev # remove after 0.12
+      version: v1
+      kind: Service
+      resource: services
+    - group: serving.knative.dev # remove after 0.12
+      version: v1
+      kind: Configuration
+      resource: configurations
+    - group: extensions
+      version: v1beta1
+      kind: Deployment
+      resource: deployments
+    - group: apps
+      version: v1
+      kind: ReplicaSet
+      resource: replicasets
+    - group: apps
+      version: v1
+      kind: DaemonSet
+      resource: daemonsets
+    - group: apps
+      version: v1
+      kind: StatefulSet
+      resource: statefulsets
+    - group: batch
+      version: v1
+      kind: Job
+      resource: jobs
+
+  names:
+    plural: subscribables
+    singular: subscribable
+
+  additionalPrinterColumns:
+    - name: Ready
+      type: string
+      JSONPath: ".status.conditions[?(@.type=='Ready')].status"
+    - name: Reason
+      type: string
+      JSONPath: ".status.conditions[?(@.type=='Ready')].reason"
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp
+    # - TODO other columns?
+
+  schema:
+    openAPIV3Schema:
+      # TODO

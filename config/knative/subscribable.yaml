@@ -1,0 +1,27 @@
+apiVersion: discovery.knative.dev/v1alpha1
+kind: DuckType
+metadata:
+  name: subscribable.messaging.knative.dev
+spec:
+  selectors:
+    - selector: "messaging.knative.dev/subscribable=true"
+
+  names:
+    plural: subscribables
+    singular: subscribable
+
+  additionalPrinterColumns:
+    - name: Ready
+      type: string
+      JSONPath: ".status.conditions[?(@.type=='Ready')].status"
+    - name: Reason
+      type: string
+      JSONPath: ".status.conditions[?(@.type=='Ready')].reason"
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp
+    # - TODO other columns?
+
+  schema:
+    openAPIV3Schema:
+      # TODO

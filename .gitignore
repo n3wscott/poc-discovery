@@ -1,15 +1,12 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# Operating system temporary files
+.DS_Store
 
-# Test binary, built with `go test -c`
-*.test
+# Editor/IDE specific settings
+.idea
+.vscode/
+*.iml
 
-# Output of the go coverage tool, specifically when used with LiteIDE
+# Temporary output of build tools
+bazel-*
 *.out
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
+.idea/

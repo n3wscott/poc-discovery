@@ -1,0 +1,29 @@
+apiVersion: discovery.knative.dev/v1alpha1
+kind: DuckType
+metadata:
+  name: source.duck.knative.dev
+spec:
+  selectors:
+    - selector: "duck.knative.dev/source=true"
+
+  names:
+    plural: sources
+    singular: source
+
+  additionalPrinterColumns:
+    - name: Ready
+      type: string
+      JSONPath: ".status.conditions[?(@.type=='Ready')].status"
+    - name: Reason
+      type: string
+      JSONPath: ".status.conditions[?(@.type=='Ready')].reason"
+    - name: SINK
+      type: string
+      JSONPath: .status.sinkUri
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp
+
+  schema:
+    openAPIV3Schema:
+      # TODO
