@@ -37,8 +37,8 @@ spec:
       resource: jobs
 
   names:
-    plural: subscribables
-    singular: subscribable
+    plural: podspecables
+    singular: podspecable
 
   additionalPrinterColumns:
     - name: Ready

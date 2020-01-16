@@ -7,8 +7,8 @@ spec:
     - selector: "duck.knative.dev/binding=true"
 
   names:
-    plural: subscribables
-    singular: subscribable
+    plural: bindings
+    singular: binding
 
   additionalPrinterColumns:
     - name: Ready

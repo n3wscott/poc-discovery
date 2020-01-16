@@ -181,8 +181,8 @@ If the `./condif/knative` directory is applied, a quick view of the duck types t
 $ kubectl get ducktypes
 NAME                                 SHORT NAME     DUCKS   READY   REASON
 addressable.duck.knative.dev         addressable    11      True
-binding.duck.knative.dev             subscribable   2       True
-podspecable.duck.knative.dev         subscribable   7       True
+binding.duck.knative.dev             binding        2       True
+podspecable.duck.knative.dev         podspecable    7       True
 source.duck.knative.dev              source         7       True
 subscribable.messaging.knative.dev   subscribable   2       True
 ```
