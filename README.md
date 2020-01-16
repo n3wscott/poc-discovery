@@ -71,7 +71,7 @@ spec:
 
 After applying this, you can fetch it:
 
-```shell script
+```shell
 $  kubectl get ducktypes addressable.duck.knative.dev
 NAME                           SHORT NAME    DUCKS   READY   REASON
 addressable.duck.knative.dev   addressable   11      True
@@ -79,7 +79,7 @@ addressable.duck.knative.dev   addressable   11      True
 
 And get the full DuckType `addressable.duck.knative.dev` resource: 
 
-```shell script
+```shell
 $ kubectl get ducktypes addressable.duck.knative.dev -oyaml
 apiVersion: discovery.knative.dev/v1alpha1
 kind: DuckType
@@ -173,10 +173,11 @@ status:
   observedGeneration: 1
 ```
 
+## Knative Duck Types
 
 If the `./condif/knative` directory is applied, a quick view of the duck types that are on the cluster becomes easier to get:
 
-```shell script
+```shell
 $ kubectl get ducktypes
 NAME                                 SHORT NAME     DUCKS   READY   REASON
 addressable.duck.knative.dev         addressable    11      True
