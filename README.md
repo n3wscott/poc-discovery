@@ -16,7 +16,8 @@ could fulfill a role for another resource.
 
 ### example.yaml
 
-```yaml
+```bash
+kubectl apply --filename - << END
 apiVersion: discovery.knative.dev/v1alpha1
 kind: DuckType
 metadata:
@@ -67,6 +68,7 @@ spec:
               properties:
                 url:
                   type: string
+END
 ```
 
 After applying this, you can fetch it:
@@ -175,7 +177,13 @@ status:
 
 ## Knative Duck Types
 
-If the `./condif/knative` directory is applied, a quick view of the duck types that are on the cluster becomes easier to get:
+If the `./config/knative` directory is applied:
+
+```shell
+ko apply -f ./config/knative/
+```
+
+then a quick view of the duck types that are on the cluster becomes easier to get:
 
 ```shell
 $ kubectl get ducktypes
