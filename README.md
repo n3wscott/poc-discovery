@@ -175,7 +175,7 @@ status:
 
 ## Knative Duck Types
 
-If the `./condif/knative` directory is applied, a quick view of the duck types that are on the cluster becomes easier to get:
+If the `./config/knative` directory is applied (via `kubectl apply -f config/knative`), a quick view of the duck types that are on the cluster becomes easier to get:
 
 ```shell
 $ kubectl get ducktypes
