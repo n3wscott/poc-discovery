@@ -24,7 +24,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/mattbaird/jsonpatch"
+	jsonpatch "gomodules.xyz/jsonpatch/v2"
 	admissionv1beta1 "k8s.io/api/admission/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"knative.dev/pkg/system"
@@ -37,6 +37,10 @@ import (
 // CreateResource creates a testing.Resource with the given name in the system namespace.
 func CreateResource(name string) *pkgtest.Resource {
 	return &pkgtest.Resource{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       "Resource",
+			APIVersion: "v1",
+		},
 		ObjectMeta: metav1.ObjectMeta{
 			Namespace: system.Namespace(),
 			Name:      name,

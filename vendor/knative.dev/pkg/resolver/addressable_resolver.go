@@ -106,7 +106,7 @@ func (r *URIResolver) URIFromDestination(dest duckv1beta1.Destination, parent in
 // URIFromDestinationV1 resolves a v1.Destination into a URL.
 func (r *URIResolver) URIFromDestinationV1(dest duckv1.Destination, parent interface{}) (*apis.URL, error) {
 	if dest.Ref != nil {
-		url, err := r.URIFromObjectReference(dest.Ref, parent)
+		url, err := r.URIFromKReference(dest.Ref, parent)
 		if err != nil {
 			return nil, err
 		}
@@ -130,13 +130,22 @@ func (r *URIResolver) URIFromDestinationV1(dest duckv1.Destination, parent inter
 	return nil, errors.New("destination missing Ref and URI, expected at least one")
 }
 
+func (r *URIResolver) URIFromKReference(ref *duckv1.KReference, parent interface{}) (*apis.URL, error) {
+	return r.URIFromObjectReference(&corev1.ObjectReference{Name: ref.Name, Namespace: ref.Namespace, APIVersion: ref.APIVersion, Kind: ref.Kind}, parent)
+}
+
 // URIFromObjectReference resolves an ObjectReference to a URI string.
 func (r *URIResolver) URIFromObjectReference(ref *corev1.ObjectReference, parent interface{}) (*apis.URL, error) {
 	if ref == nil {
 		return nil, errors.New("ref is nil")
 	}
 
-	if err := r.tracker.Track(*ref, parent); err != nil {
+	if err := r.tracker.TrackReference(tracker.Reference{
+		APIVersion: ref.APIVersion,
+		Kind:       ref.Kind,
+		Namespace:  ref.Namespace,
+		Name:       ref.Name,
+	}, parent); err != nil {
 		return nil, fmt.Errorf("failed to track %+v: %v", ref, err)
 	}
 
