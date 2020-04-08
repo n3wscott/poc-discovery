@@ -1,15 +1,26 @@
-on: [push]
+name: tomles-update
+
+on: 
+  - push
 
 jobs:
-  hello_world_job:
+  pre-release:
+
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: tomles update
+
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: n3wscott/tomles-action@learning
+    - uses: actions/checkout@v2
+
+    - uses: n3wscott/tomles-action@learning2
       with:
-        who-to-greet: 'Mona the Octocat'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+        package: knative.dev/pkg
+        branch: release-0.14
+
+## todo: dep update.
+
+    - uses: peter-evans/create-pull-request@v2.4.4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'Update Gopkg.toml via tomles'
+        title: 'Update Gopkg.toml via tomles'
