@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: n3wscott/tomles-action@learning5
+    - uses: n3wscott/tomles-action@learning6
       with:
         package: knative.dev/pkg
         branch: release-0.14
