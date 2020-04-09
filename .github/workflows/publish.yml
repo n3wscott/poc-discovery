@@ -1,0 +1,38 @@
+name: publishe
+
+on: 
+  - pull_request
+
+jobs:
+  ko:
+
+    runs-on: ubuntu-latest
+
+    env:
+      GOPATH: ${{ github.workspace }}
+      GO111MODULE: off
+
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13.x
+      id: go
+
+    - name: Check out code onto GOPATH
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+        path: ./src/github.com/${{ github.repository }}
+
+    - name: Add GOPATH/bin to PATH
+      shell: bash
+      run: |
+        echo "::set-env name=GOPATH::$(go env GOPATH)"
+        echo "::add-path::$(go env GOPATH)/bin"
+
+    - uses: n3wscott/ko-action@learning1
+      with:
+        filename: ./config
+        config: ${{ secrets.DOCKER_CONFIG }}
+        repo: hub.docker.com/n3wscott
